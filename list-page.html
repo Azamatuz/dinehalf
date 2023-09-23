@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>DineHalf</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+  <body>
+    <header class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="#">
+                    <img src="img/dinehalf-logo.png" alt="DineHalf Logo" width="100">
+                </a>
+
+                <!-- Cart Button icon  <i class="bi bi-bag-fill"></i>-->
+                <a href="#" class="cart-button">
+                    <i class="bi bi-bag-fill"></i>
+                </a>
+
+            </div>
+        </nav>
+    </header>
+    <div id="app" class="card card-bg my-3">
+        <div class="card-body">
+            <h3 class="card-title"{{ restaurant.name }}</h3>
+            <div class="row">
+                <div class="col-6">
+                    <p class="card-text">Address</p>
+                </div>
+                <div class="col-6">
+                    <p class="card-text">{{ meals.length }} Meal(s)</p>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="img/meal.png" height="50px" alt="">
+                            <h6 class="card-title">Meal Title</h6>
+                            <p class="card-subtitle">Meal price</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bottom Navbar -->
+    <nav class="navbar navbar-light fixed-bottom bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-map-fill"></i>
+            </a>
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-cup-fill"></i>
+            </a>
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-person-fill"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- vuejs 2 cdn files -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- axios cdn file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script>
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                restaurant: [],
+                meals: []
+            },
+            mounted() {
+                axios.get('http://127.0.0.1:5000/')
+                    .then(response => {
+                        this.restaurant = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                axios.get(`http://127.0.0.1:5000/$(this.restaurant.id)`)
+                    .then(response => {
+                        this.meals = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+        })
+    </script>
+    </body>
+</html>

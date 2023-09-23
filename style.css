@@ -1,0 +1,30 @@
+.bg-light {
+    background-color: #64ac77 !important;
+}
+.bi-bag-fill {
+    font-size: 1.5rem;
+}
+.bi {
+    color: #f3f5f4 !important;
+}
+.bi-green {
+    color: #64ac77 !important;
+}
+.card-subtitle {
+    color: #0a12ed !important;
+    font-size: 12px !important;
+}
+.card-bg {
+    height: 500px;
+}
+.btn-primary {
+    background-color: #64ac77 !important;
+    border-color: #64ac77 !important;
+}
+.icon-button {
+    color: #64ac77;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
